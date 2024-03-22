@@ -5,6 +5,7 @@ pipeline {
         stage('Hello') {
             steps {
                 sh 'ls -la'
+                sh 'node app.js'
             }
         }
     }
