@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo npm install'
+                sh 'sudo npm install -g'
                 sh 'node ./app.js'
             }
         }
