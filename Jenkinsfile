@@ -4,7 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo npm install -g'
+                sh 'apt update'
+                sh 'apt install npm'
+            }
+        }
+        stage('Test') {
+            steps {
                 sh 'node ./app.js'
             }
         }
