@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'apt-get upgrade'
-                sh 'apt-get install npm -y'
+                sh 'sudo apt-get upgrade'
+                sh 'sudo apt-get install npm -y'
             }
         }
         stage('Test') {
