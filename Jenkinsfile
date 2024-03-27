@@ -5,13 +5,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'apt-get -s upgrade'
-                sh 'npm install'
+                sh 'docker build -t leztwaper/todo-app:5 .'
             }
         }
         stage('Test') {
             steps {
-                sh 'node ./app.js &'
+                sh 'echo Test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploy'
             }
         }
     }
