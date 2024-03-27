@@ -11,8 +11,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'node ./app.js'
-                sh 'exit'
+                sh 'node ./app.js &'
             }
         }
     }
