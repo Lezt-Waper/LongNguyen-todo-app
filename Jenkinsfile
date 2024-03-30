@@ -1,19 +1,17 @@
 node {
     def app
 
-    stages {
-        stage('Build') {
-            app = docker.build("leztwaper-todo-app:5")
+    stage('Build') {
+        app = docker.build("leztwaper-todo-app:5")
+    }
+    stage('Test') {
+        app.inside {
+            sh 'echo "Test"'
         }
-        stage('Test') {
-            app.inside {
-                sh 'echo "Test"'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'echo Deploy'
-            }
+    }
+    stage('Deploy') {
+        steps {
+            sh 'echo Deploy'
         }
     }
 }
