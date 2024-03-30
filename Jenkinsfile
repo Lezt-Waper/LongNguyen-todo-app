@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-    tools {docker "Docker"}
     stages {
         stage('Build') {
             app = docker.build("leztwaper-todo-app:5")
