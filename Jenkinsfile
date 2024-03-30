@@ -1,5 +1,5 @@
 node {
-    tool {Docker "Docker"}
+    tool {Docker}
     def app
 
     stage('Build') {
