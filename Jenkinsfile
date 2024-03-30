@@ -4,13 +4,11 @@ pipeline {
     tools {docker "Docker"}
     stages {
         stage('Build') {
-            steps {
-                sh 'docker build -t leztwaper/todo-app:5 .'
-            }
+            app = docker.build("leztwaper-todo-app:5")
         }
         stage('Test') {
-            steps {
-                sh 'echo Test'
+            app.inside {
+                sh 'echo "Test"'
             }
         }
         stage('Deploy') {
