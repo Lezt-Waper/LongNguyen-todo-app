@@ -27,9 +27,12 @@ pipeline {
 
         stage('Pull docker to EC2') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'ssh-credentials-id', keyFileVariable: 'KEY')]) {
-                    sh 'ls .ssh'
-                }
+                withBuildConfiguration {
+                    sshagent(credentials: [SSH_ID_REF]) {
+                        sh '''
+                            docker ps
+                        '''
+                    }
             }
         }
     }
