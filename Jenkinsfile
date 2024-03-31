@@ -1,18 +1,22 @@
-node {
+pipeline {
     tool {Docker 'Docker'}
-    def app
 
-    stage('Build') {
-        app = docker.build("leztwaper-todo-app:5")
-    }
-    stage('Test') {
-        app.inside {
-            sh 'echo "Test"'
+    stages {
+        stage('Build') {
+            steps {
+                docker build -t leztwaper/todo-app:5 .
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo Test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploy'
+            }
         }
     }
-    stage('Deploy') {
-        steps {
-            sh 'echo Deploy'
-        }
-    }
+
 }
