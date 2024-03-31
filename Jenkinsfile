@@ -28,7 +28,7 @@ pipeline {
         stage('Pull docker to EC2') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ssh-credentials-id', keyFileVariable: 'KEY')]) {
-                    sh 'ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -i ${KEY} root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com docker ps'
+                    sh 'ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -i ${KEY} root@ec2-18-142-231-213.ap-southeast-1.compute.amazonaws.com docker ps'
                 }
             }
         }
