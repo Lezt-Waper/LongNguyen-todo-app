@@ -1,19 +1,11 @@
 pipeline {
-    agent none
-    tools {dockerTool 'docker'}
+    agent {
+        docker {
+            image 'node:16-alpine'
+        }
+    }
 
     stages {
-        stage('Maven Install') {
-            agent {
-                docker {
-                    image 'maven:lastest'
-                }
-            }
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-
         stage('Docker build') {
             agent any
             steps {
