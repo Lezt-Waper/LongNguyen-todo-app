@@ -3,9 +3,7 @@
 import groovy.transform.Field
 
 @Field
-String DOCKER_USER_REF = '<DOCKERHUB_ID_PLACEHOLDER>'
-@Field
-String SSH_ID_REF = '<SSH_ID_PLACEHOLDER>'
+String SSH_ID_REF = 'ssh-credentials-id'
 
 pipeline {
     agent any
@@ -14,7 +12,7 @@ pipeline {
     stages {
         stage('Docker build') {
             steps {
-                sh 'docker build -t vitnguyen/mgm-training-todo-app .'
+                sh 'docker build -t vitnguyen/mgm-training-todo-app:0.0.3 .'
             }
         }
 
@@ -22,7 +20,20 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'v-docker-hub', usernameVariable: 'USER', passwordVariable: 'PASSWD')]) {
                     sh 'docker login -u "$USER" -p "$PASSWD"'
-                    sh 'docker push vitnguyen/mgm-training-todo-app'
+                    sh 'docker push vitnguyen/mgm-training-todo-app:0.0.3'
+                }
+            }
+        }
+
+        stage('Pull docker to EC2') {
+            steps {
+                withBuildConfiguration {
+                    sshagent(credentials: [SSH_ID_REF]) {
+                        sh '''
+                            docker pull vitnguyen/mgm-training-todo-app:0.0.3
+                            docker run -rm -p 8000:8000 vitnguyen/mgm-training-todo-app:0.0.3
+                        '''
+                    }
                 }
             }
         }
