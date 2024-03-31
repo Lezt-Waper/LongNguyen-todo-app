@@ -28,7 +28,8 @@ pipeline {
         stage('Pull docker to EC2') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ssh-credentials-id', keyFileVariable: 'KEY')]) {
-                    sh 'ssh-add "$KEY"'
+                    sh 'cat "$KEY" > ./key'
+                    sh 'ssh-add ./key'
                     sh 'ssh root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com'
                 }
             }
