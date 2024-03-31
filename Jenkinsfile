@@ -20,8 +20,8 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'v-docker-hub', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
-                    sh 'docker login -u "$USER" -p "$PWD"'
+                withCredentials([usernamePassword(credentialsId: 'v-docker-hub', usernameVariable: 'USER', passwordVariable: 'PASSWD')]) {
+                    sh 'docker login -u "$USER" -p "$PASSWD"'
                     sh 'docker push vitnguyen/mgm-training-todo-app'
                 }
             }
