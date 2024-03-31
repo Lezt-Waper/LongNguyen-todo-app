@@ -27,13 +27,8 @@ pipeline {
 
         stage('Pull docker to EC2') {
             steps {
-                withBuildConfiguration {
-                    sshagent(credentials: [SSH_ID_REF]) {
-                        sh '''
-                            docker pull vitnguyen/mgm-training-todo-app:0.0.3
-                            docker run -rm -p 8000:8000 vitnguyen/mgm-training-todo-app:0.0.3
-                        '''
-                    }
+                withCredentials([sshUserPrivateKey(credentialsId: 'ssh-credentials-id', keyFileVariable: 'KEY')]) {
+                    sh 'ls "$KEY"'
                 }
             }
         }
