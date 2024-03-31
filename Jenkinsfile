@@ -1,5 +1,5 @@
 pipeline {
-    tool {Docker 'Docker'}
+    tools {dockerTool 'Docker'}
 
     stages {
         stage('Build') {
