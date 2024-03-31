@@ -33,6 +33,7 @@ pipeline {
                             docker ps
                         '''
                     }
+                }
             }
         }
     }
