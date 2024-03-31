@@ -27,12 +27,10 @@ pipeline {
 
         stage('Pull docker to EC2') {
             steps {
-                withBuildConfiguration {
-                    sshagent(credentials: [SSH_ID_REF]) {
-                        sh '''
-                            docker ps
-                        '''
-                    }
+                sshagent(credentials: [SSH_ID_REF]) {
+                    sh '''
+                        docker ps
+                    '''
                 }
             }
         }
